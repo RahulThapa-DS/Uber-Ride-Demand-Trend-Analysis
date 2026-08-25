@@ -68,7 +68,7 @@ The initial model yields an $R^2$ near zero, indicating that simple time feature
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/your-username/uber-ride-analysis.git](https://github.com/your-username/uber-ride-analysis.git)
+   git clone [https://github.com/RahulThapa-DS/uber-ride-analysis.git](https://github.com/RahulThapa-DS/uber-ride-analysis.git)
    cd uber-ride-analysis
    ```
 2. **Install required packages:**
