@@ -56,3 +56,18 @@ y = hourly_df['Ride_Count']
 # Performance Metrics
 RMSE: 0.36
 R² Score: -0.02
+ ```
+### Model Performance Discussion
+The initial model yields an $R^2$ near zero, indicating that simple time features (`Hour` and `Day`) alone contain insufficient variance to accurately predict hourly volume.
+
+**Future Improvements:** Enhance performance by incorporating weather data, geographic location clustering (latitude/longitude), holiday flags, and lag variables (rolling 3-hour demand).
+
+---
+
+## 🚀 How to Run Locally
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/your-username/uber-ride-analysis.git](https://github.com/your-username/uber-ride-analysis.git)
+   cd uber-ride-analysis
+   ```
