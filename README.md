@@ -81,13 +81,15 @@ pip install pandas numpy matplotlib seaborn scikit-learn
 ```bash
 jupyter notebook "Uber Ride Analysis -Project 2.ipynb"
 ```
-###📋 Project Deliverables Checklist
-[x] Python Jupyter Notebook (.ipynb) codebase
+---
+##📋 Project Deliverables Checklist
+* **Python Jupyter Notebook (.ipynb) codebase**
 
-[x] Data Preprocessing & Clean Pipeline
+* **Data Preprocessing & Clean Pipeline**
 
-[x] Seaborn & Matplotlib Visualization Suite
+* **Seaborn & Matplotlib Visualization Suite**
 
-[x] Predictive Model & Metrics Evaluation
+* **Predictive Model & Metrics Evaluation**
 
-[x] Documented README Summary Report
+* **Documented README Summary Report**
+---
