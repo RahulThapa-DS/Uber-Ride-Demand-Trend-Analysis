@@ -71,3 +71,23 @@ The initial model yields an $R^2$ near zero, indicating that simple time feature
    git clone [https://github.com/your-username/uber-ride-analysis.git](https://github.com/your-username/uber-ride-analysis.git)
    cd uber-ride-analysis
    ```
+2. **Install required packages:**
+
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn
+```
+3. **Launch the notebook:**
+
+```bash
+jupyter notebook "Uber Ride Analysis -Project 2.ipynb"
+```
+###📋 Project Deliverables Checklist
+[x] Python Jupyter Notebook (.ipynb) codebase
+
+[x] Data Preprocessing & Clean Pipeline
+
+[x] Seaborn & Matplotlib Visualization Suite
+
+[x] Predictive Model & Metrics Evaluation
+
+[x] Documented README Summary Report
