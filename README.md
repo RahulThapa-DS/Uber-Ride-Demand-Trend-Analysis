@@ -69,7 +69,7 @@ The repository includes scripts to generate interactive and static executive das
 2. **Install required packages:**
 
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn
+pip install pandas numpy matplotlib seaborn plotly scikit-learn
 ```
 3. **Launch the notebook:**
 
@@ -77,14 +77,39 @@ pip install pandas numpy matplotlib seaborn scikit-learn
 jupyter notebook "Uber Ride Analysis -Project 2.ipynb"
 ```
 ---
-## 📋 Project Deliverables Checklist
-* **Python Jupyter Notebook (.ipynb) codebase**
+## 📋 Uber Ride Analysis — Project Deliverables Checklist
 
-* **Data Preprocessing & Clean Pipeline**
+### 1. Data Pipeline & Exploratory Data Analysis
+- [x] **Data Preprocessing & Cleaning:** Loaded raw ride dataset (`1,155` trips) and handled missing values.
+- [x] **Feature Engineering:** Extracted temporal indicators (`Request Hour`, `Day_of_Week`, `Is_Weekend`).
+- [x] **Time-Series Construction:** Built full complete hourly time-series grid (`8,784` hours).
 
-* **Seaborn & Matplotlib Visualization Suite**
+### 2. Machine Learning & Predictive Analytics
+- [x] **Model Training:** Trained a **Random Forest Regressor** to forecast hourly ride request volume.
+- [x] **Feature Importance Evaluation:** Calculated and visualized feature weight rankings (`Request Hour`, `Day_of_Week`, etc.).
+- [x] **Validation & Testing:** Evaluated predictive performance across the test horizon (`1,757` hours).
 
-* **Predictive Model & Metrics Evaluation**
+### 3. Dynamic Pricing & Operations Decision Engine
+- [x] **Surge Multiplier Rules:** Implemented rule-based dynamic pricing based on forecasted hourly demand.
+- [x] **Driver Dispatch Tiers:** Categorized fleet dispatch priority into 4 operational tiers (Tier 1 Max Bonus to Tier 4 Base Fare).
+- [x] **Incentive Bonus Pool:** Allocated surge bonus payouts to optimize supply-demand equilibrium during peak hours.
 
-* **Documented README Summary Report**
+### 4. Executive Dashboards & Data Visualizations
+- [x] **Predictive Analytics Plot:** 2D line plot tracking hourly demand trends across days of the week.
+- [x] **Operations Pie Chart:** Distribution of driver dispatch priority tiers.
+- [x] **Pricing Heatmap:** Dynamic surge factor matrix (`Day_of_Week` vs. `Request Hour`).
+- [x] **Financial Impact Area Chart:** Gross revenue uplift comparison (Dynamic Surge vs. Flat Base Fare).
+- [x] **Interactive Dashboard:** Built consolidated 2x2 interactive Plotly subplots for executive presentation.
+
+### 5. Business Quantification & Financial Summary
+- [x] **Baseline Revenue:** Calculated flat base fare benchmark ($3,633.73).
+- [x] **Optimized Gross Revenue:** Quantified dynamic surge total revenue ($6,987.92).
+- [x] **Net Revenue Uplift:** Documented absolute gain (+$3,354.19 / **+92.3% Increase**).
+- [x] **Driver Earnings Breakdown:** Computed platform revenue split ($1,397.58 platform fee vs. $5,590.34 driver earnings, including +$2,683.35 in surge bonuses).
+
+---
+
+### 6. Repository & Documentation (GitHub)
+- [x] Jupyter Notebook (`Uber Ride Analysis -Project 2.ipynb`) verified and executable.
+- [x] Portfolio `README.md` documentation ready with executive summary, architecture, and running instructions.
 ---
