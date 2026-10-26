@@ -84,39 +84,22 @@ pip install pandas numpy matplotlib seaborn plotly scikit-learn
 jupyter notebook "Uber Ride Analysis -Project 2.ipynb"
 ```
 ---
-## 📋 Uber Ride Analysis — Project Deliverables Checklist
+## 📋 Project Deliverables Checklist
 
-### 1. Data Pipeline & Exploratory Data Analysis
-- [x] **Data Preprocessing & Cleaning:** Loaded raw ride dataset (`1,155` trips) and handled missing values.
-- [x] **Feature Engineering:** Extracted temporal indicators (`Request Hour`, `Day_of_Week`, `Is_Weekend`).
-- [x] **Time-Series Construction:** Built full complete hourly time-series grid (`8,784` hours).
+### 1. Data Cleaning & Standardization
+- [x] Load dataset (`Uber Drives - .csv`) and strip non-trip summary rows.
+- [x] Parse datetime values for `START_DATE*` and `END_DATE*`.
+- [x] Handle missing values in trip attribute columns.
 
-### 2. Machine Learning & Predictive Analytics
-- [x] **Model Training:** Trained a **Random Forest Regressor** to forecast hourly ride request volume.
-- [x] **Feature Importance Evaluation:** Calculated and visualized feature weight rankings (`Request Hour`, `Day_of_Week`, etc.).
-- [x] **Validation & Testing:** Evaluated predictive performance across the test horizon (`1,757` hours).
+### 2. Temporal & Lag Feature Engineering
+- [x] Extract start and end hour, day of week, and date fields.
+- [x] Compute duration in minutes (`Duration_mins`).
+- [x] Map hourly time slots (`Early Morning`, `Morning Peak`, `Afternoon`, `Evening Peak`, `Late Night`).
+- [x] Create indicator flags (`Is_Rush_Hour`, `Is_Night`).
+- [x] Construct cyclical features (`hour_sin`, `hour_cos`).
+- [x] Generate lag and rolling mean demand metrics (`Demand_Lag_1h`, `Demand_Lag_24h`, `Rolling_Mean_3h`).
 
-### 3. Dynamic Pricing & Operations Decision Engine
-- [x] **Surge Multiplier Rules:** Implemented rule-based dynamic pricing based on forecasted hourly demand.
-- [x] **Driver Dispatch Tiers:** Categorized fleet dispatch priority into 4 operational tiers (Tier 1 Max Bonus to Tier 4 Base Fare).
-- [x] **Incentive Bonus Pool:** Allocated surge bonus payouts to optimize supply-demand equilibrium during peak hours.
-
-### 4. Executive Dashboards & Data Visualizations
-- [x] **Predictive Analytics Plot:** 2D line plot tracking hourly demand trends across days of the week.
-- [x] **Operations Pie Chart:** Distribution of driver dispatch priority tiers.
-- [x] **Pricing Heatmap:** Dynamic surge factor matrix (`Day_of_Week` vs. `Request Hour`).
-- [x] **Financial Impact Area Chart:** Gross revenue uplift comparison (Dynamic Surge vs. Flat Base Fare).
-- [x] **Interactive Dashboard:** Built consolidated 2x2 interactive Plotly subplots for executive presentation.
-
-### 5. Business Quantification & Financial Summary
-- [x] **Baseline Revenue:** Calculated flat base fare benchmark ($3,633.73).
-- [x] **Optimized Gross Revenue:** Quantified dynamic surge total revenue ($6,987.92).
-- [x] **Net Revenue Uplift:** Documented absolute gain (+$3,354.19 / **+92.3% Increase**).
-- [x] **Driver Earnings Breakdown:** Computed platform revenue split ($1,397.58 platform fee vs. $5,590.34 driver earnings, including +$2,683.35 in surge bonuses).
-
----
-
-### 6. Repository & Documentation (GitHub)
-- [x] Jupyter Notebook (`Uber Ride Analysis -Project 2.ipynb`) verified and executable.
-- [x] Portfolio `README.md` documentation ready with executive summary, architecture, and running instructions.
----
+### 3. Exploratory Visualization
+- [x] Generate hourly request volume distribution plot.
+- [x] Generate category/purpose breakdown per time slot heatmap.
+- [x] Generate log-scaled mileage distribution histogram.
