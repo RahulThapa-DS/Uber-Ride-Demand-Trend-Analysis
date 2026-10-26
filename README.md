@@ -74,7 +74,7 @@ y = hourly_df['Ride_Count']
 
 # Performance Metrics
 RMSE: 0.36
-R² Score: -0.02
+R² Score: 0.02
 ```
 
 ## 🚀 How to Run
