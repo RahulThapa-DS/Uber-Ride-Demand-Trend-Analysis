@@ -1,9 +1,3 @@
-# 🚗 Uber Ride Demand Forecasting & Dynamic Pricing Optimization
-
-An end-to-end Data Science and Business Analytics project that leverages machine learning to forecast hourly ride demand, optimize dynamic surge pricing multipliers, and quantify executive financial impact.
-
----
-
 # 🚗 Uber Drives Data Analysis & Feature Engineering
 
 An end-to-end Data Analysis and Feature Engineering project on Uber trip data, focusing on data cleaning, temporal feature extraction, time-slot categorization, and exploratory visualization of ride request patterns.
@@ -71,13 +65,6 @@ The notebook generates the following visual outputs:
 - **Trip Distance Distribution:** A histogram with KDE overlay showing trip distances (`MILES*`) on a log scale.
 
 ---
-
-## 🚀 How to Run
-
-1. **Clone the Repository:**
-   ```bash
-   git clone [https://github.com/RahulThapa-DS/Uber-Ride-Analysis.git](https://github.com/RahulThapa-DS/Uber-Ride-Analysis.git)
-   cd Uber-Ride-Analysis
 
 ## 🚀 How to Run
 
