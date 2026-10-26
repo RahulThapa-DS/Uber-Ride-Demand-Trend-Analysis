@@ -4,19 +4,26 @@ An end-to-end Data Science and Business Analytics project that leverages machine
 
 ---
 
+# 🚗 Uber Drives Data Analysis & Feature Engineering
+
+An end-to-end Data Analysis and Feature Engineering project on Uber trip data, focusing on data cleaning, temporal feature extraction, time-slot categorization, and exploratory visualization of ride request patterns.
+
+---
+
 ## 📌 Executive Summary
 
-Modern ride-hailing platforms balance driver availability and passenger demand through dynamic pricing. This project builds a machine learning pipeline using a **Random Forest Regressor** to predict hourly ride request volumes. Based on forecasted demand, the engine dynamically adjusts surge multipliers to:
-- Maximize revenue during peak demand windows.
-- Allocate driver dispatch priorities to high-demand clusters.
-- Balance supply and demand through structured driver surge incentive bonuses.
+This project processes and analyzes a dataset of 1,155 Uber trip records. The analysis transforms raw start/end timestamps into granular temporal features, categorizes trips into distinct operational time slots, and evaluates distance distributions and hourly ride demand patterns.
 
-### Key Financial & Operational Results
-- **Raw Trips Analyzed:** 1,155 rides across an 8,784-hour time-series grid.
-- **Baseline Gross Revenue (Flat Fare):** $3,633.73
-- **Dynamic Optimized Revenue:** $6,987.92
-- **Net Revenue Uplift:** **+$3,354.19 (+92.3% Increase)**
-- **Driver Earnings (80% Payout):** $5,590.34 (includes +$2,683.35 in surge incentive bonuses)
+### Key Dataset & Operational Insights
+- **Total Records Processed:** 1,154 individual trips (excluding the total summary row).
+- **Total Miles Tracked:** 12,204.7 miles across business and personal categories.
+- **Primary Features Engineered:**
+  - `Request Hour`, `Request Day`, `Request Date`
+  - `End Hour`, `End Day`, `End Date`
+  - `Duration_mins` (calculated trip duration)
+  - `Time Slot` (`Early Morning`, `Morning Peak`, `Afternoon`, `Evening Peak`, `Late Night`)
+  - Cyclical time features (`hour_sin`, `hour_cos`)
+  - Time-series indicators & lags (`Is_Rush_Hour`, `Is_Night`, `Demand_Lag_1h`, `Demand_Lag_24h`, `Rolling_Mean_3h`)
 
 ---
 
@@ -24,40 +31,53 @@ Modern ride-hailing platforms balance driver availability and passenger demand t
 
 - **Programming Language:** Python 3.x
 - **Data Manipulation:** `pandas`, `numpy`
-- **Machine Learning:** `scikit-learn` (Random Forest Regressor)
-- **Data Visualization:** `matplotlib`, `seaborn`, `plotly`
+- **Data Visualization:** `matplotlib`, `seaborn`
 - **Environment:** Jupyter Notebook / JupyterLab
 
 ---
 
-## 📊 Pipeline & Decision Engine Architecture
+## 📊 Pipeline & Analysis Architecture
 
-1. **Feature Engineering & Time-Series Modeling:**
-   - Extracts temporal features including `Request Hour`, `Day_of_Week`, and `Is_Weekend`.
-   - Constructs a complete hourly time-series grid to accurately model demand variations.
+1. **Data Preprocessing & Cleaning:**
+   - Ingests raw trip data (`Uber Drives - .csv`).
+   - Removes dataset summary/total row at index 1155.
+   - Converts `START_DATE*` and `END_DATE*` columns into standard datetime objects.
 
-2. **Predictive Analytics:**
-   - Random Forest Regressor models demand trends across different days and peak hours.
+2. **Feature Engineering:**
+   - Extracts hour, day name, and date from start and end timestamps.
+   - Computes total trip duration in minutes (`Duration_mins`).
+   - Maps start hours into 5 operational time slots:
+     - **Early Morning:** 04:00 – 07:59
+     - **Morning Peak:** 08:00 – 11:59
+     - **Afternoon:** 12:00 – 16:59
+     - **Evening Peak:** 17:00 – 21:59
+     - **Late Night:** 22:00 – 03:59
+   - Generates indicator variables for rush hours (`08-10`, `17-19`) and night hours (`22-05`).
+   - Encodes cyclical sine/cosine transformations for hours to represent 24-hour periodicity.
+   - Builds lag and rolling demand features (`Demand_Lag_1h`, `Demand_Lag_24h`, `Rolling_Mean_3h`).
 
-3. **Dynamic Pricing & Dispatch Logic:**
-   - Assigns dynamic surge multipliers based on forecasted ride volume.
-   - Categorizes driver dispatch priority into operational tiers (Tier 1 Max Bonus, Tier 2 Medium, Tier 3 Standard, Tier 4 Base Fare).
+3. **Exploratory Data Analysis & Visualization:**
+   - Analyzes distribution of ride request counts per hour of the day.
+   - Maps ride frequency by trip category/purpose across time slots using cross-tabulation heatmaps.
+   - Plots trip distance distributions (`MILES*`) using log-scale transformations.
 
-4. **Financial Quantification:**
-   - Computes platform take-rate revenue (20% Uber platform fee) vs. driver payout (80%).
-   - Evaluates surge revenue uplift against standard flat base fare models.
+---
+
+## 📈 Visualizations Included
+
+The notebook generates the following visual outputs:
+- **Hourly Ride Request Volume:** A countplot displaying total ride requests segmented by `Request Hour`.
+- **Time Slot vs. Purpose/Category Heatmap:** A cross-tabulation heatmap illustrating trip volume across time slots and business/personal purposes.
+- **Trip Distance Distribution:** A histogram with KDE overlay showing trip distances (`MILES*`) on a log scale.
 
 ---
 
-## 📈 Visualizations & Dashboards
+## 🚀 How to Run
 
-The repository includes scripts to generate interactive and static executive dashboards:
-- **Predictive Analytics:** Hourly demand trendlines segmented by day of the week.
-- **Operations:** Driver dispatch allocation priority pie distribution.
-- **Pricing Engine:** Hourly surge factor heatmap (`Day_of_Week` vs. `Request Hour`).
-- **Financial Quantification:** Area chart displaying net revenue uplift over flat base fare.
-
----
+1. **Clone the Repository:**
+   ```bash
+   git clone [https://github.com/RahulThapa-DS/Uber-Ride-Analysis.git](https://github.com/RahulThapa-DS/Uber-Ride-Analysis.git)
+   cd Uber-Ride-Analysis
 
 ## 🚀 How to Run
 
