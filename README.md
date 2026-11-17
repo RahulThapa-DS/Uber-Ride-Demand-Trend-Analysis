@@ -112,33 +112,28 @@ Because surge windows represent a minority class (`12.2%` train), models are ran
    git clone [https://github.com/RahulThapa-DS/Uber-Ride-Analysis.git](https://github.com/RahulThapa-DS/Uber-Ride-Analysis.git)
    cd Uber-Ride-Analysis
    ```
-2. **Install required packages:**
 
-```bash
-pip install pandas numpy matplotlib seaborn plotly scikit-learn
-```
-3. **Launch the notebook:**
-
-```bash
-jupyter notebook "Uber Ride Analysis -Project 2.ipynb"
-```
 ---
-## 📋 Project Deliverables Checklist
+## ✅ Project Deliverables & Evaluation Checklist
 
-### 1. Data Cleaning & Standardization
-- [x] Load dataset (`Uber Drives - .csv`) and strip non-trip summary rows.
-- [x] Parse datetime values for `START_DATE*` and `END_DATE*`.
-- [x] Handle missing values in trip attribute columns.
+### 1. Project Code (`Uber Ride Demand & Trend Analysis.ipynb`)
+- [x] **Clean, Reproducible Notebook:** End-to-end Python pipeline (`Steps 1–5` & `Step Final`) runs cleanly from top to bottom without errors.
+- [x] **Data Cleansing & Preprocessing:** Handles missing values, parses mixed datetime entries (`START_DATE*`, `END_DATE*`), removes the summary footer (`1,155` → `1,154` valid trips), and constructs continuous zero-filled temporal grids (`8,784` 1-hr slots & `2,196` 4-hr blocks).
+- [x] **Leakage-Free Feature Engineering:** Generates `16` time-series features including cyclical encodings (`Period_Sin`, `Period_Cos`, `Day_Sin`, `Day_Cos`), autoregressive lags (`Demand_Lag_1blk`, `2blk`, `6blk_24h`, `42blk_7d`), and shifted rolling statistics (`.shift(1).rolling(...)`).
+- [x] **Chronological Modeling & Threshold Tuning:** Implements an `80/20` chronological train/test split (`1,756` train / `440` test blocks), evaluates 5 balanced classifiers (`Logistic Regression`, `Extra Trees`, `Random Forest`, `Gradient Boosting`, `XGBoost`), and optimizes the probability cutoff (`tune_f1_threshold` → `>= 0.667`).
 
-### 2. Temporal & Lag Feature Engineering
-- [x] Extract start and end hour, day of week, and date fields.
-- [x] Compute duration in minutes (`Duration_mins`).
-- [x] Map hourly time slots (`Early Morning`, `Morning Peak`, `Afternoon`, `Evening Peak`, `Late Night`).
-- [x] Create indicator flags (`Is_Rush_Hour`, `Is_Night`).
-- [x] Construct cyclical features (`hour_sin`, `hour_cos`).
-- [x] Generate lag and rolling mean demand metrics (`Demand_Lag_1h`, `Demand_Lag_24h`, `Rolling_Mean_3h`).
+### 2. Project Report (`README.md`)
+- [x] **Dataset Documentation:** Details source records (`1,154` trips across `2016-01-01` to `2016-12-31`, `12,204.7` total miles), raw schema, and derived operational features (`Time_Block`, `Is_Peak_Block`, `Duration_Mins`).
+- [x] **Operational & Demand Insights:** Highlights peak operational blocks (`Time_Block` `2–4`), business vs. personal trip distribution, and the `88.5%` → `69.6%` sparsity reduction achieved via 4-hour aggregation.
+- [x] **Machine Learning Discussion:** Compares **Step 4** trip duration regression (`Linear Regression [Log-Target]`, `R² = 60.72%`, `RMSE = 10.84 mins`) against **Step 5 / Step Final** surge classification (`Logistic Regression (Balanced)`, `PR-AUC = 0.4174` vs. `0.1886` baseline, `Surge F1 = 46.56%`).
 
-### 3. Exploratory Visualization
-- [x] Generate hourly request volume distribution plot.
-- [x] Generate category/purpose breakdown per time slot heatmap.
-- [x] Generate log-scaled mileage distribution histogram.
+### 3. Data Science Implementation & Visualizations
+- [x] **Core Libraries:** Uses `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, and `xgboost`.
+- [x] **Exploratory Data Analysis (EDA):** Analyzes hourly/block demand patterns, trip distance/duration skewness, and class imbalance (`12.2%` train surge rate).
+- [x] **Diagnostic Visuals:** Includes multi-panel evaluation plots (PR-AUC model leaderboard, Precision-Recall curve with tuned F1 operating point, and Top 10 standardized log-odds feature drivers).
+
+### 4. Presentation & Live Q&A Readiness (15–20 Minutes)
+- [ ] **GitHub / ZIP Packaging:** Verify `.ipynb`, `README.md`, and `UberDataset.csv` are committed together with all cell outputs saved and visible.
+- [ ] **Workflow Walkthrough (5–6 mins):** Explain the transition from `1-hour` Random Forest regression (`39.89%` F1) to `4-hour` Balanced Logistic Regression (`46.56%` F1, `+6.67%` gain).
+- [ ] **Live Code Demo (5–6 mins):** Walk through `add_calendar_features`, `.shift(1)` leakage prevention, `tune_f1_threshold`, and the Step Final comparison table.
+- [ ] **Q&A Defense (5 mins):** Ready to explain why `PR-AUC` was chosen over `ROC-AUC` for imbalanced surge windows, why `Logistic Regression` beat tree ensembles on `1,756` sparse rows, and how weather/event data would improve future iterations.
