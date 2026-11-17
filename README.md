@@ -131,9 +131,3 @@ Because surge windows represent a minority class (`12.2%` train), models are ran
 - [x] **Core Libraries:** Uses `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, and `xgboost`.
 - [x] **Exploratory Data Analysis (EDA):** Analyzes hourly/block demand patterns, trip distance/duration skewness, and class imbalance (`12.2%` train surge rate).
 - [x] **Diagnostic Visuals:** Includes multi-panel evaluation plots (PR-AUC model leaderboard, Precision-Recall curve with tuned F1 operating point, and Top 10 standardized log-odds feature drivers).
-
-### 4. Presentation & Live Q&A Readiness (15–20 Minutes)
-- [ ] **GitHub / ZIP Packaging:** Verify `.ipynb`, `README.md`, and `UberDataset.csv` are committed together with all cell outputs saved and visible.
-- [ ] **Workflow Walkthrough (5–6 mins):** Explain the transition from `1-hour` Random Forest regression (`39.89%` F1) to `4-hour` Balanced Logistic Regression (`46.56%` F1, `+6.67%` gain).
-- [ ] **Live Code Demo (5–6 mins):** Walk through `add_calendar_features`, `.shift(1)` leakage prevention, `tune_f1_threshold`, and the Step Final comparison table.
-- [ ] **Q&A Defense (5 mins):** Ready to explain why `PR-AUC` was chosen over `ROC-AUC` for imbalanced surge windows, why `Logistic Regression` beat tree ensembles on `1,756` sparse rows, and how weather/event data would improve future iterations.
