@@ -14,7 +14,7 @@ This project processes and analyzes a full-year operational dataset of **1,155 r
   * `Duration_Mins`: Exact trip length computed from parsed `START_DATE*` and `END_DATE*` timestamps.
   * `Speed_MPH`: Effective trip velocity (`MILES / (Duration_Mins / 60)`).
   * `Time_Block`: Six 4-hour operational windows per day (`0` through `5`, mapping `Request Hour // 4`).
-  * `Is_Peak_Block`: Binary indicator capturing peak daytime/evening demand blocks (`2`, `3`, and `4`).
+  * `Is_Peak_Block`: Binary indicator capturing peak daytime/evening demand blocks (`2`, `3`, and `4`, covering 08:00–20:00).
 
 ---
 
@@ -40,7 +40,7 @@ To prevent target leakage and solve extreme zero-inflation in sparse ride logs, 
 
 ### B. Feature Engineering (`16` Time-Series Predictors)
 * **Calendar Indicators:** `Time_Block`, `Day_Of_Week`, `Month`, `Is_Weekend`, and `Is_Peak_Block`.
-* **Cyclical Trigonometric Encoding (`add_calendar_features`):** Applied $\sin(2\pi \cdot t / T)$ and $\cos(2\pi \cdot t / T)$ (`Period_Sin`, `Period_Cos`, `Day_Sin`, `Day_Cos`) so models preserve circular continuity across midnight (`Block 5` → `Block 0`) and weekend boundaries (`Sunday` → `Monday`).
+* **Cyclical Trigonometric Encoding:** Applied $\sin(2\pi \cdot t / T)$ and $\cos(2\pi \cdot t / T)$ (`Block_Sin`/`Period_Sin`, `Block_Cos`/`Period_Cos`, `Day_Sin`, `Day_Cos`) so models preserve circular continuity across midnight (`Block 5` → `Block 0`) and weekend boundaries (`Sunday` → `Monday`).
 * **Leakage-Free Autoregressive Lags & Rolling Windows:**
   * `Demand_Lag_1blk` & `Demand_Lag_2blk` (4-hour and 8-hour momentum).
   * `Demand_Lag_6blk_24h` & `Demand_Lag_42blk_7d` (same 4-hour window 24 hours and 7 days prior).
@@ -85,7 +85,7 @@ Because surge windows represent a minority class (`12.2%` train), models are ran
 ## 📊 5. Key Results, Challenges & Business Applications
 
 ### Summary of Findings
-* **2.2× Lift Over No-Skill Baseline:** `StandardScaler` + `LogisticRegression(class_weight="balanced")` with a tuned probability threshold (`>= 0.667`) achieved a **PR-AUC of `0.4174`** (vs. `0.1886` baseline) and **ROC-AUC of `0.8057`**.
+* **2.2× Lift Over No-Skill Baseline:** `StandardScaler` + `LogisticRegression(class_weight="balanced")` with a tuned probability threshold (`>= 0.667`) achieved a **PR-AUC of `0.4174`** (vs. `0.1886` baseline) and **ROC-AUC of `0.8057`**, catching `44` of `83` test surge blocks (`TP: 44 | FP: 62 | FN: 39 | TN: 295`).
 * **+6.67% Surge F1 Gain from Temporal Aggregation:** Shifting from 1-hour Random Forest regression (`39.89%` F1) to 4-hour balanced classification (`46.56%` F1) cut zero-slot sparsity by **18.9 percentage points** and boosted alert precision from `31.99%` to `41.51%`.
 * **Primary Surge Drivers:** Standardized log-odds coefficients confirm that **24-hour rolling demand (`Rolling_Mean_6blk_24h` / `Rolling_Max_6blk_24h`)**, **recent 1-block lag (`Demand_Lag_1blk`)**, and **cyclical time-of-day encodings (`Period_Sin`, `Period_Cos`, `Is_Peak_Block`)** are the strongest predictors of upcoming demand spikes.
 
